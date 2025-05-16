@@ -1,39 +1,67 @@
-import { Component, HostListener } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  QueryList,
+  ViewChildren
+} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  standalone: false
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  currentPage = 0;
-  pages = document.querySelectorAll('.page');
+export class AppComponent implements AfterViewInit {
+  @ViewChildren('pageRef') pages!: QueryList<ElementRef>;
 
-  @HostListener('window:wheel', ['$event'])
-  onScroll(event: WheelEvent) {
-    if (event.deltaY > 0) {
-      this.nextPage();
-    } else {
-      this.prevPage();
-    }
+  idlePeriod = 100;
+  animationDuration = 1000;
+  lastAnimation = 0;
+  currentPage = 0;
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.scrollToPage(this.currentPage);
+    });
   }
 
-  nextPage() {
+  @HostListener('window:wheel', ['$event'])
+  onWheel(event: WheelEvent) {
+    const timeNow = Date.now();
+
+    if (timeNow - this.lastAnimation < this.idlePeriod + this.animationDuration) {
+      event.preventDefault();
+      return;
+    }
+
+    if (event.deltaY > 0) {
+      this.goToNextPage();
+    } else {
+      this.goToPreviousPage();
+    }
+
+    this.lastAnimation = timeNow;
+  }
+
+  private goToNextPage() {
     if (this.currentPage < this.pages.length - 1) {
       this.currentPage++;
       this.scrollToPage(this.currentPage);
     }
   }
 
-  prevPage() {
+  private goToPreviousPage() {
     if (this.currentPage > 0) {
       this.currentPage--;
       this.scrollToPage(this.currentPage);
     }
   }
 
-  scrollToPage(page: number) {
-    this.pages[page].scrollIntoView({ behavior: 'smooth' });
+  private scrollToPage(index: number) {
+    const page = this.pages.toArray()[index];
+    if (page) {
+      page.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 }
