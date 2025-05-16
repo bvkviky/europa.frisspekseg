@@ -4,7 +4,8 @@ import {
   ElementRef,
   HostListener,
   QueryList,
-  ViewChildren
+  ViewChildren,
+  OnDestroy
 } from '@angular/core';
 
 @Component({
@@ -12,7 +13,7 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('pageRef') pages!: QueryList<ElementRef>;
 
   idlePeriod = 100;
@@ -21,12 +22,14 @@ export class AppComponent implements AfterViewInit {
   currentPage = 0;
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.scrollToPage(this.currentPage);
-    });
+    this.showPageContent(this.currentPage);
   }
 
-  @HostListener('window:wheel', ['$event'])
+  ngOnDestroy() {
+    // Nothing to clean up since we use @HostListener
+  }
+
+  @HostListener('wheel', ['$event'])
   onWheel(event: WheelEvent) {
     const timeNow = Date.now();
 
@@ -42,20 +45,52 @@ export class AppComponent implements AfterViewInit {
     }
 
     this.lastAnimation = timeNow;
+    event.preventDefault();
   }
 
   private goToNextPage() {
     if (this.currentPage < this.pages.length - 1) {
+      this.togglePageContent(this.currentPage, false);
       this.currentPage++;
+      this.togglePageContent(this.currentPage, true);
       this.scrollToPage(this.currentPage);
     }
   }
 
   private goToPreviousPage() {
     if (this.currentPage > 0) {
+      this.togglePageContent(this.currentPage, false);
       this.currentPage--;
+      this.togglePageContent(this.currentPage, true);
       this.scrollToPage(this.currentPage);
     }
+  }
+
+  private togglePageContent(index: number, show: boolean) {
+    const page = this.pages.toArray()[index];
+    if (page) {
+      const content = page.nativeElement.querySelector('.page-content');
+      if (content) {
+        if (show) {
+          content.classList.add('show');
+        } else {
+          content.classList.remove('show');
+        }
+      }
+    }
+  }
+
+  private showPageContent(index: number) {
+    this.pages.forEach((page, i) => {
+      const content = page.nativeElement.querySelector('.page-content');
+      if (content) {
+        if (i === index) {
+          content.classList.add('show');
+        } else {
+          content.classList.remove('show');
+        }
+      }
+    });
   }
 
   private scrollToPage(index: number) {
