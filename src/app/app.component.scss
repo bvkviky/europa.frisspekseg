@@ -25,11 +25,11 @@ html, body {
   flex-wrap: wrap;
 }
 
+
 .logoSvg-container img {
   height: 60px;
   width: auto;
 }
-
 ul {
   list-style: none;
   display: flex;
@@ -50,7 +50,9 @@ ul li a:hover {
   color: #3498db;
 }
 
-
+ul li a:hover {
+  color: #3498db;
+}
 
 
 
@@ -91,5 +93,17 @@ ul li a:hover {
   &:nth-of-type(5) {
     background-color: #f39c12;
   }
+}
 
+.home-sz{
+  display: flex;
+  align-items: center;
+  padding: 3rem 5rem;
+  text-align: center;
+
+}
+@media (max-width: 768px) {
+  .page {
+    padding: 0 2rem; /* oldalirányú kis távolság mobilon */
+  }
 }

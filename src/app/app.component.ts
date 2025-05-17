@@ -15,7 +15,6 @@ import {
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('pageRef') pages!: QueryList<ElementRef>;
-
   idlePeriod = 100;
   animationDuration = 1000;
   lastAnimation = 0;
@@ -100,5 +99,4 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       page.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
 }
