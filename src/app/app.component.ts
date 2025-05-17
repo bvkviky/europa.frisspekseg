@@ -15,11 +15,13 @@ import {
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('pageRef') pages!: QueryList<ElementRef>;
+  menuOpen: boolean = false;
 
   idlePeriod = 100;
   animationDuration = 1000;
   lastAnimation = 0;
   currentPage = 0;
+
 
   ngAfterViewInit() {
     this.showPageContent(this.currentPage);
@@ -98,5 +100,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     if (page) {
       page.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+
   }
 }
