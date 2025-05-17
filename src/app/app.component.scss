@@ -54,20 +54,31 @@ ul li a:hover {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+
+    /* Méretek csökkentése */
+    padding: 0.5rem 1rem; /* kisebb belső margó */
+    font-size: 0.9rem;   /* kisebb betűméret */
   }
 
-  ul {
+  .navbar ul {
     flex-direction: column;
+    gap: 10px; /* kisebb távolság a menüpontok között */
     width: 100%;
-    gap: 10px;
-    margin-top: 0.5rem;
+    padding: 0;
   }
 
-  ul li a {
-    padding: 0.75rem 1rem;
-    width: 100%;
+  .navbar ul li a {
+    padding: 0.5rem 0; /* kisebb padding a linkeken */
+  }
+
+  .logoSvg-container img {
+    height: 30px; /* kisebb logó */
+    width: auto;
+
   }
 }
+
+
 
 
 .page {
