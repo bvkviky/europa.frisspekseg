@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #2b2a28; /* Alap szövegszín */
+  background-color: #fff; /* Háttérszín */
+}
+h1{
+  font-family: "Montserrat", sans-serif;
+  color: #E3B577;
+  font-weight: bold;
+  font-size: 3rem;
+
+}
+h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+  color: #E3B577;
+  font-weight: bold;
+
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #E3B577;
+  line-height: 1.0;
+  text-align: center;
+  box-sizing: border-box;
+
+}
+@media (max-width: 750px) {
+  p {
+    max-width: 100%;
+    word-wrap: break-word;
+    font-size: 1rem; /* kisebb betűméret */
+    padding: 0 0.5rem;
+  }
+}
+
+.page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem; /* Köztes tér a h1 és p között */
+}
+
+
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  .logoSvg-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .logoSvg{
+    display: flex;
+    width: 95px;
+    height: 70px;
+
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 22px 0 22px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 20px; /* Space between menu items */
+
+      li {
+        a {
+          text-decoration: none;
+          color: #333; /* Dark text color */
+          font-weight: bold;
+          transition: color 0.3s;
+
+          &:hover {
+            color: #3498db; /* Change color on hover for better UX */
+          }
+        }
+      }
+    }
+  }
+}
+
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  // color: white;
+
+  &:nth-of-type(1) {
+    background-image: url("/assets/images/unsplash_8_WAllwUaRA.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  &:nth-of-type(1) {
+    background-color: #333333;
+  }
+
+  &:nth-of-type(2) {
+    background-color: #F6F1EB;
+  }
+
+  &:nth-of-type(3) {
+    // background-image: url("/assets/images/backgroundPageth.jpg");
+    background-size: cover;
+    background-position: center;
+    background-color: #040404;
+  }
+
+  &:nth-of-type(4) {
+    background-color: #9b59b6;
+  }
+
+  &:nth-of-type(5) {
+    background-color: #f39c12;
+  }
+
+}
