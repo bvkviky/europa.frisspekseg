@@ -98,13 +98,13 @@ ul li a:hover {
 .home-sz{
   display: flex;
   align-items: center;
-  padding: 3rem 5rem;
+  padding: 3rem 6rem;
   text-align: center;
 
 }
-@media (max-width: 768px) {
-  .page {
-    text-align: center;
-/* oldalirányú kis távolság mobilon */
-  }
+
+.page-content{
+  padding: 2rem 2rem;
 }
+/* Kis képernyőn csökkentheted a betűméretet */
+
