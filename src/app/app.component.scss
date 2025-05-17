@@ -102,9 +102,7 @@ ul li a:hover {
   text-align: center;
 
 }
-@media (max-width: 768px) {
-  .page {
-    text-align: center;
-/* oldalirányú kis távolság mobilon */
-  }
+
+.page-content{
+  padding: 2rem 2rem;
 }
